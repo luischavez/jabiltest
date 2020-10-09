@@ -1,5 +1,5 @@
  1. Crear un Fork de este repositorio.
- 2. Agregar un listener al botón Submit cuando se le dé clic.
+ 2. Agregar un listener al formulario (evento submit).
  3. Prevenir que la pagina se refresque cuando se da clic en el botón Submit.
  4. Generar un nombre de usuario aleatorio, este debe de ser el mismo cada vez que se envié un mensaje.
  5. Prevenir que se envíen mensajes vacíos.
