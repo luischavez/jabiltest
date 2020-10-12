@@ -1,28 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Jabil</title>
 </head>
+
 <body>
-    <section id="messages"></section>
-
+    <h2 id="user"></h2>
     <form id="message-form">
-        <input type="text" name="message" placeholder="Message...">
-
-        <input type="submit" value="Submit">
+        <div class="input-group mb-3">
+            <input id="message-input" type="text" name="message" class="form-control" placeholder="Message...">
+            <div class="input-group-append">
+                <input id="submit-btn" type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </div>
     </form>
 
+    <section id="messages"></section>
     <template id="message">
-        <article class="message">
-            <b class="message-sender"></b>:
+        <article class="message card">
+            <b class="message-sender"></b>
             <p class="message-body"></p>
         </article>
     </template>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <script>
-        // ADD CODE HERE.
+        $(document).ready(function () {
+            $('#user').text('user' + Math.random());
+            $(document).on('submit', '#message-form', function () {
+                console.log('submitted');
+            });
+            $('#submit-btn').on('click', function (e) {
+                e.preventDefault();
+                if ($('#message-input').val() !== '') {
+                    AddMessage();
+                    console.log('click');
+                }
+                else {
+                    alert('You can not send empty messages');
+                }
+            });
+
+            function SetValuesToTemplate() {
+                $('#message article b.message-sender').text($('#user').text());
+                $('#message article p.message-body').text($('#message-input').val());
+            }
+
+            function Clear() {
+                $('#message article b.message-sender').text('');
+                $('#message article p.message-body').text('');
+                $('#message-input').val('');
+            }
+
+            function AddMessage() {
+                SetValuesToTemplate();
+                var obj = $('#message').html().trim();
+                $('#messages').append(obj);
+                Clear();
+            }
+        });
     </script>
 </body>
+
 </html>
