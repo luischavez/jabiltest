@@ -19,8 +19,8 @@
     <section id="messages"></section>
     <template id="message">
         <article class="message card">
-            <b class="message-sender"></b>
-            <p class="message-body"></p>
+            <b class="message-sender">{0}</b>
+            <p class="message-body">{1}</p>
         </article>
     </template>
 
@@ -52,14 +52,13 @@
             }
 
             function Clear() {
-                $('#message article b.message-sender').text('');
-                $('#message article p.message-body').text('');
                 $('#message-input').val('');
             }
 
             function AddMessage() {
-                SetValuesToTemplate();
-                var obj = $('#message').html().trim();
+                let obj = $('#message').html();
+                obj = obj.replace('{0}', $('#user').text());
+                obj = obj.replace('{1}', $('#message-input').val());
                 $('#messages').append(obj);
                 Clear();
             }
